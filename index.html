@@ -264,11 +264,15 @@
 <script>
     mapboxgl.accessToken = CONFIG.MAPBOX_TOKEN;
 
+    // 1. MOBILE OPTIMIZATION: Check width to center the WI -> LA vertical stretch
+    const isMobile = window.innerWidth < 768;
+
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-98, 38.5], 
-        zoom: 4.0,
+        // On mobile, we center slightly further east (-91) and zoom out (3.2) to fit the vertical corridor
+        center: isMobile ? [-91.0, 38.0] : [-98, 38.5], 
+        zoom: isMobile ? 3.2 : 4.0,
         interactive: false 
     });
 
@@ -294,12 +298,14 @@
         map.addSource('s-hubs-recent', { type: 'geojson', data: './web_data/hubs_recent.geojson' });
         map.addSource('s-ice', { type: 'geojson', data: './web_data/ice_october_2025.geojson' });
 
+        // 2. PRE-LOAD DATA: Setting line-opacity and hub-opacity to visible values (0.8 and 1) 
+        // so they appear immediately behind the intro title.
         map.addLayer({
             'id': 'l-hist', 'type': 'line', 'source': 's-hist',
             'paint': { 
                 'line-width': ['interpolate', ['linear'], ['get', 'frequency'], 1, 1, 30, 12], 
                 'line-color': '#0070ff',
-                'line-opacity': 0 
+                'line-opacity': 0.8  // Changed from 0 to 0.8
             }
         });
 
@@ -313,12 +319,17 @@
         });
 
         const addHubLayer = (id, source) => {
+            const isHistorical = id === 'hist';
             map.addLayer({
                 'id': `c-${id}`, 'type': 'circle', 'source': source,
                 'paint': {
                     'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 5, 100, 16],
-                    'circle-color': '#ffffff', 'circle-opacity': 0,
-                    'circle-stroke-width': 2, 'circle-stroke-color': '#000000', 'circle-stroke-opacity': 0
+                    'circle-color': '#ffffff', 
+                    // Set historical hubs to 1 immediately; keep recent at 0
+                    'circle-opacity': isHistorical ? 1 : 0, 
+                    'circle-stroke-width': 2, 
+                    'circle-stroke-color': '#000000', 
+                    'circle-stroke-opacity': isHistorical ? 1 : 0
                 }
             });
             map.addLayer({
@@ -331,7 +342,13 @@
                     'text-offset': ['match', ['get', 'iata'], 'MKE', ['literal', [2.5, 0]], 'MSN', ['literal', [-2.5, 0]], ['literal', [0, 1.5]]],
                     'text-allow-overlap': true
                 },
-                'paint': { 'text-color': '#ffffff', 'text-opacity': 0, 'text-halo-color': '#000000', 'text-halo-width': 2 }
+                'paint': { 
+                    // Set historical text to 1 immediately; keep recent at 0
+                    'text-opacity': isHistorical ? 1 : 0, 
+                    'text-halo-color': '#000000', 
+                    'text-halo-width': 2,
+                    'text-color': '#ffffff'
+                }
             });
         };
 
@@ -367,12 +384,12 @@
                 map.setPaintProperty('c-hist', 'circle-opacity', 1);
                 map.setPaintProperty('c-hist', 'circle-stroke-opacity', 1); 
                 map.setPaintProperty('t-hist', 'text-opacity', 1);
-                map.flyTo({ center: [-98, 38.5], zoom: 4.0, duration: 4000 });
+                map.flyTo({ center: isMobile ? [-91.0, 38.0] : [-98, 38.5], zoom: isMobile ? 3.2 : 4.0, duration: 4000 });
             }
             if (id === 'step-fade') {
                 updateLegend(['hist']);
                 map.setPaintProperty('l-hist', 'line-opacity', 0.15);
-                map.flyTo({ center: [-98, 38.5], zoom: 4.0 });
+                map.flyTo({ center: isMobile ? [-91.0, 38.0] : [-98, 38.5], zoom: isMobile ? 3.2 : 4.0 });
             }
             if (id === 'step-narrative-shift') {
                 updateLegend(['hist', 'recent']);
@@ -386,7 +403,7 @@
                 map.setPaintProperty('c-recent', 'circle-stroke-opacity', 1);
                 map.setPaintProperty('t-recent', 'text-opacity', 1);
                 map.setPaintProperty('l-hist', 'line-opacity', 0.15);
-                map.flyTo({ center: [-98, 38.5], zoom: 4.0, duration: 3000 });
+                map.flyTo({ center: isMobile ? [-91.0, 38.0] : [-98, 38.5], zoom: isMobile ? 3.2 : 4.0, duration: 3000 });
             }
             if (id === 'step-narrative-shadow') {
                 updateLegend(['recent', 'ice']);
@@ -398,7 +415,7 @@
                 map.setPaintProperty('l-ice', 'circle-opacity', 0.8);
                 map.setPaintProperty('l-ice', 'circle-stroke-opacity', 0.8);
                 document.getElementById('map').classList.add('interactive-map');
-                map.flyTo({ center: [-98, 38.5], zoom: 4.0, duration: 3000 });
+                map.flyTo({ center: isMobile ? [-91.0, 38.0] : [-98, 38.5], zoom: isMobile ? 3.2 : 4.0, duration: 3000 });
             }
             if (id === 'step-ice-minneapolis') {
                 updateLegend(['recent', 'ice']);
@@ -406,7 +423,7 @@
                 map.setPaintProperty('l-ice', 'circle-opacity', 0.8);
                 map.setPaintProperty('l-ice', 'circle-stroke-opacity', 0.8);
                 document.getElementById('map').classList.add('interactive-map');
-                map.flyTo({ center: [-93.26, 44.97], zoom: 7.0, duration: 3500 });
+                map.flyTo({ center: [-93.26, 44.97], zoom: isMobile ? 6.0 : 7.0, duration: 3500 });
             }
             if (id === 'step-ice-louisiana') {
                 updateLegend(['recent', 'ice']);
@@ -414,7 +431,7 @@
                 map.setPaintProperty('l-ice', 'circle-opacity', 0.8);
                 map.setPaintProperty('l-ice', 'circle-stroke-opacity', 0.8);
                 document.getElementById('map').classList.add('interactive-map');
-                map.flyTo({ center: [-91.8, 31.0], zoom: 6.5, duration: 3500 });
+                map.flyTo({ center: [-91.8, 31.0], zoom: isMobile ? 5.5 : 6.5, duration: 3500 });
             }
             if (id === 'step-ice-elpaso') {
                 updateLegend(['recent', 'ice']);
@@ -422,7 +439,7 @@
                 map.setPaintProperty('l-ice', 'circle-opacity', 0.8);
                 map.setPaintProperty('l-ice', 'circle-stroke-opacity', 0.8);
                 document.getElementById('map').classList.add('interactive-map');
-                map.flyTo({ center: [-106.48, 31.76], zoom: 8.5, duration: 3500 });
+                map.flyTo({ center: [-106.48, 31.76], zoom: isMobile ? 7.5 : 8.5, duration: 3500 });
             }
             if (id === 'step-ice-wisconsin') {
                 updateLegend(['recent', 'ice']);
@@ -432,7 +449,7 @@
                 map.setPaintProperty('l-ice', 'circle-opacity', 0.8);
                 map.setPaintProperty('l-ice', 'circle-stroke-opacity', 0.8);
                 document.getElementById('map').classList.add('interactive-map');
-                map.flyTo({ center: [-88.5, 44.0], zoom: 7.0, duration: 4000 });
+                map.flyTo({ center: [-88.5, 44.0], zoom: isMobile ? 6.0 : 7.0, duration: 4000 });
             }
             if (id === 'step-final-message') {
                 updateLegend([]);
@@ -441,7 +458,14 @@
         })
         .onStepExit(res => {
             res.element.classList.remove('active');
-            if (res.element.id === 'step-historical' && res.direction === 'up') updateLegend([]);
+            if (res.element.id === 'step-historical' && res.direction === 'up') {
+                // Return to initial load state when scrolling back to the top
+                map.setPaintProperty('l-hist', 'line-opacity', 0.8);
+                map.setPaintProperty('c-hist', 'circle-opacity', 1);
+                map.setPaintProperty('c-hist', 'circle-stroke-opacity', 1);
+                map.setPaintProperty('t-hist', 'text-opacity', 1);
+                updateLegend([]);
+            }
         });
 
         map.on('mousemove', 'l-ice', (e) => {
@@ -459,7 +483,6 @@
         });
     });
 
-    // Height fix for mobile jumpiness
     function updateHeight() {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
