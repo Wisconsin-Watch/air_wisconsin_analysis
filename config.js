@@ -1,3 +1,3 @@
 const CONFIG = {
-    MAPBOX_TOKEN: 'pk.eyJ1IjoicGtpZWZlciIsImEiOiJjbWxqeWRsNzMwNHV5M3FweTMyemY5emQzIn0.iPzQxYOu7uNUkophKSfiLA'
+    MAPBOX_TOKEN: 'pk.eyJ1IjoicGtpZWZlciIsImEiOiJjbWxsNHV5cTYwNGJ6M2xvbm00M2NibGl4In0.o4LYDR7JC61VgxWM1MAj8w'
 };
