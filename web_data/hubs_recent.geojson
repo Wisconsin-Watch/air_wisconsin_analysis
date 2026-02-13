@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "hubs_recent",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "icao": "KMKE", "iata": "MKE", "name": "General Mitchell International Airport", "count": 101 }, "geometry": { "type": "Point", "coordinates": [ -87.897064, 42.946932 ] } },
+{ "type": "Feature", "properties": { "icao": "KMSP", "iata": "MSP", "name": "Minneapolis-St Paul International/Wold-Chamberlain Airport", "count": 30 }, "geometry": { "type": "Point", "coordinates": [ -93.221778, 44.881972 ] } },
+{ "type": "Feature", "properties": { "icao": "KELP", "iata": "ELP", "name": "El Paso International Airport", "count": 30 }, "geometry": { "type": "Point", "coordinates": [ -106.376361, 31.807333 ] } },
+{ "type": "Feature", "properties": { "icao": "KAEX", "iata": "AEX", "name": "Alexandria International Airport", "count": 28 }, "geometry": { "type": "Point", "coordinates": [ -92.548556, 31.327372 ] } },
+{ "type": "Feature", "properties": { "icao": "KMSN", "iata": "MSN", "name": "Dane County Regional/Truax Field", "count": 24 }, "geometry": { "type": "Point", "coordinates": [ -89.337504, 43.139879 ] } },
+{ "type": "Feature", "properties": { "icao": "KGRK", "iata": "GRK", "name": "Robert Gray Army Air Field", "count": 21 }, "geometry": { "type": "Point", "coordinates": [ -97.828917, 31.06725 ] } },
+{ "type": "Feature", "properties": { "icao": "KATW", "iata": "ATW", "name": "Appleton International Airport", "count": 19 }, "geometry": { "type": "Point", "coordinates": [ -88.519072, 44.258093 ] } },
+{ "type": "Feature", "properties": { "icao": "KTCL", "iata": "TCL", "name": "Tuscaloosa Ntl Airport", "count": 16 }, "geometry": { "type": "Point", "coordinates": [ -87.611404, 33.220629 ] } },
+{ "type": "Feature", "properties": { "icao": "KBWI", "iata": "BWI", "name": "Baltimore/Washington International Thurgood Marshall Airport", "count": 8 }, "geometry": { "type": "Point", "coordinates": [ -76.668991, 39.175728 ] } },
+{ "type": "Feature", "properties": { "icao": "KRIC", "iata": "RIC", "name": "Richmond International Airport", "count": 8 }, "geometry": { "type": "Point", "coordinates": [ -77.319739, 37.505181 ] } }
+]
+}

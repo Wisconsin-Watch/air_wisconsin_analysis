@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "hubs_historical",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "icao": "KMKE", "iata": "MKE", "name": "General Mitchell International Airport", "count": 121 }, "geometry": { "type": "Point", "coordinates": [ -87.897064, 42.946932 ] } },
+{ "type": "Feature", "properties": { "icao": "KMSN", "iata": "MSN", "name": "Dane County Regional/Truax Field", "count": 62 }, "geometry": { "type": "Point", "coordinates": [ -89.337504, 43.139879 ] } },
+{ "type": "Feature", "properties": { "icao": "KLAN", "iata": "LAN", "name": "Capital Region International Airport", "count": 26 }, "geometry": { "type": "Point", "coordinates": [ -84.586206, 42.778647 ] } },
+{ "type": "Feature", "properties": { "icao": "KATW", "iata": "ATW", "name": "Appleton International Airport", "count": 18 }, "geometry": { "type": "Point", "coordinates": [ -88.519072, 44.258093 ] } },
+{ "type": "Feature", "properties": { "icao": "KCMH", "iata": "CMH", "name": "John Glenn Columbus International Airport", "count": 16 }, "geometry": { "type": "Point", "coordinates": [ -82.892159, 39.996947 ] } },
+{ "type": "Feature", "properties": { "icao": "KSBN", "iata": "SBN", "name": "South Bend International Airport", "count": 16 }, "geometry": { "type": "Point", "coordinates": [ -86.317337, 41.708224 ] } },
+{ "type": "Feature", "properties": { "icao": "KORD", "iata": "ORD", "name": "Chicago O'Hare International Airport", "count": 16 }, "geometry": { "type": "Point", "coordinates": [ -87.90815, 41.97694 ] } },
+{ "type": "Feature", "properties": { "icao": "KLNK", "iata": "LNK", "name": "Lincoln Airport", "count": 13 }, "geometry": { "type": "Point", "coordinates": [ -96.759121, 40.850891 ] } },
+{ "type": "Feature", "properties": { "icao": "KBMG", "iata": "BMG", "name": "Monroe County Airport", "count": 12 }, "geometry": { "type": "Point", "coordinates": [ -86.61668, 39.146021 ] } },
+{ "type": "Feature", "properties": { "icao": "KCIU", "iata": "CIU", "name": "Chippewa County International Airport", "count": 8 }, "geometry": { "type": "Point", "coordinates": [ -84.472384, 46.250752 ] } }
+]
+}
