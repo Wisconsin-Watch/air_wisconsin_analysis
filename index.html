@@ -270,8 +270,8 @@
     const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v11',
-        // On mobile, we center slightly further east (-91) and zoom out (3.2) to fit the vertical corridor
-        center: isMobile ? [-91.0, 38.0] : [-98, 38.5], 
+        // On mobile, center slightly further east (-89) and zoom out (3.2) to fit the vertical corridor
+        center: isMobile ? [-89.0, 38.0] : [-98, 38.5], 
         zoom: isMobile ? 3.2 : 4.0,
         interactive: false 
     });
