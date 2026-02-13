@@ -317,7 +317,7 @@
                 'paint': {
                     'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 5, 100, 16],
                     'circle-color': '#ffffff', 'circle-opacity': 0,
-                    'circle-stroke-width': 2, 'circle-stroke-color': '#000', 'circle-stroke-opacity': 0
+                    'circle-stroke-width': 2, 'circle-stroke-color': '#000000', 'circle-stroke-opacity': 0
                 }
             });
             map.addLayer({
@@ -353,7 +353,7 @@
             res.element.classList.add('active');
             
             const resetLayers = () => {
-                const props = [['l-hist','line-opacity'],['l-recent','line-opacity'],['c-hist','circle-opacity'],['t-hist','text-opacity'],['c-recent','circle-opacity'],['t-recent','text-opacity'],['l-ice','circle-opacity'],['l-ice','circle-stroke-opacity']];
+                const props = [['l-hist','line-opacity'],['l-recent','line-opacity'],['c-hist','circle-opacity'],['c-hist','circle-stroke-opacity'],['t-hist','text-opacity'],['c-recent','circle-opacity'],['c-recent','circle-stroke-opacity'],['t-recent','text-opacity'],['l-ice','circle-opacity'],['l-ice','circle-stroke-opacity']];
                 props.forEach(p => map.setPaintProperty(p[0], p[1], 0));
                 document.getElementById('map').classList.remove('interactive-map');
             };
@@ -364,6 +364,7 @@
                 updateLegend(['hist']);
                 map.setPaintProperty('l-hist', 'line-opacity', 0.8);
                 map.setPaintProperty('c-hist', 'circle-opacity', 1);
+                map.setPaintProperty('c-hist', 'circle-stroke-opacity', 1); 
                 map.setPaintProperty('t-hist', 'text-opacity', 1);
                 map.flyTo({ center: [-98, 38.5], zoom: 4.0, duration: 4000 });
             }
@@ -381,6 +382,7 @@
                 updateLegend(['hist', 'recent']);
                 map.setPaintProperty('l-recent', 'line-opacity', 0.9);
                 map.setPaintProperty('c-recent', 'circle-opacity', 1);
+                map.setPaintProperty('c-recent', 'circle-stroke-opacity', 1);
                 map.setPaintProperty('t-recent', 'text-opacity', 1);
                 map.setPaintProperty('l-hist', 'line-opacity', 0.15);
                 map.flyTo({ center: [-98, 38.5], zoom: 4.0, duration: 3000 });
